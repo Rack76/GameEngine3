@@ -15,6 +15,8 @@ void Engine::run()
 
 	while (true) //TODO exit condtion
 	{
-		updateTasks();
+		taskManager.updateTasks();
+
+		//TODO updaterate controller -> Ticks time ?
 	}
 }
