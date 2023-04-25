@@ -10,4 +10,11 @@ void Engine::init()
 
 void Engine::run()
 {
+	//loop w exit condition
+		//tasks update (Task Sheduler/Manager)
+
+	while (true) //TODO exit condtion
+	{
+		updateTasks();
+	}
 }
