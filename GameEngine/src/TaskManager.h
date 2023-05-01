@@ -28,7 +28,6 @@ public:
 private:
 	//usefull to use two maps ?
 	std::map<unsigned int, Task> tasks;
-	std::list<std::vector<Task>> waitingTasks;
 	std::map<unsigned int, Task> permanentTasks;
 
 	unsigned int taskCounter = 0;
