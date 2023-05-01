@@ -15,20 +15,18 @@ struct Task {
 
 class TaskManager {
 public:
-	unsigned int runTask(std::function<void()> function);
-	unsigned int runDelayedTask(std::function<void()> function, unsigned long delay);
-	unsigned int runRepetitiveTask(std::function<void()> function, unsigned long delay, unsigned long duration);
-	unsigned int runPermanentTask(std::function<void()> function, unsigned long delay);
+	unsigned int runTask(std::function<void()> function, unsigned long delay);
+	unsigned int runRepetitiveTask(std::function<void()> function, unsigned long delay = 0, unsigned long period = 1);
 
-	bool cancel(int taskID);
-	bool wasRun(int taskID);
+	bool cancel(unsigned int taskID);
+	bool wasRun(unsigned int taskID);
 
 	void updateTasks();
 
 private:
 	//usefull to use two maps ?
-	std::map<int, Task> tasks;
-	std::map<int, Task> permanentTasks;
+	std::map<unsigned int, Task> tasks;
+	std::map<unsigned int, Task> permanentTasks;
 
 	unsigned int taskCounter = 0;
 };
