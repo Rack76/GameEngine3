@@ -127,11 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ArchetypeManager.cpp" />
+    <ClCompile Include="src\ComponentManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Archetype.h" />
+    <ClInclude Include="src\ArchetypeManager.h" />
+    <ClInclude Include="src\ComponentManager.h" />
     <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\EntityManager.h" />
     <ClInclude Include="src\Event.h" />
     <ClInclude Include="src\EventHandler.h" />
     <ClInclude Include="src\system\System.h" />
