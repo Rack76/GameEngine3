@@ -131,6 +131,7 @@
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Math.cpp" />
     <ClCompile Include="src\TaskManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +141,8 @@
     <ClInclude Include="src\EntityManager.h" />
     <ClInclude Include="src\Event.h" />
     <ClInclude Include="src\EventHandler.h" />
+    <ClInclude Include="src\Math.h" />
+    <ClInclude Include="src\PeriodicDelayedCounter.h" />
     <ClInclude Include="src\system\System.h" />
     <ClInclude Include="src\TaskManager.h" />
   </ItemGroup>
