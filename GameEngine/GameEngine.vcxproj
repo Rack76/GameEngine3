@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Archetype.cpp" />
     <ClCompile Include="src\ComponentManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Archetype.h" />
+    <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\ComponentManager.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EntityManager.h" />

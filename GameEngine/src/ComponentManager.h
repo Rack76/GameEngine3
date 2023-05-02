@@ -1,5 +1,9 @@
 #pragma once
 
+#include "Component.h"
+#include <map>
+#include <functional>
+
 class ComponentManager
 {
 public:

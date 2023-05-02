@@ -1,3 +1,5 @@
+#include "Engine.h"
+
 int main(void)
 {
 
@@ -5,7 +7,7 @@ int main(void)
     Engine engine;
     engine.init();
     engine.run();
-    engine.terminate();
+    //engine.terminate();
 
     return 0;
 }

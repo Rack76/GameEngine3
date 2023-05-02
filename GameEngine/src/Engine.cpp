@@ -5,7 +5,7 @@ void Engine::init()
 	//init librairies
 	//instantiate systems
 	//add entity types to systems
-	buildArchetypes(systems);
+	//add entities
 }
 
 void Engine::run()
@@ -15,7 +15,7 @@ void Engine::run()
 
 	while (true) //TODO exit condtion
 	{
-		taskManager.updateTasks();
+		taskManager.runTasks();
 
 		//TODO updaterate controller -> Ticks time ?
 	}

@@ -16,7 +16,7 @@ void EntityManager::addEntity(int entityType)
 		auto componentTypes = entityType_componentTypesTable.at(entityType);
 		for (auto componentType : componentTypes)
 		{
-			entityType_archetypeTable[entityType].addComponent(componentManager->createComponent(componentType), componentType);
+			entityType_archetypeTable[entityType].setComponent(componentManager->createComponent(componentType), componentType);
 		}
 	}
 
@@ -33,9 +33,9 @@ void EntityManager::updateArchetypes(std::map<int, std::vector<Component*>> comp
 		for (int i = 0; i < count; i++)
 		{
 			int componentType = va_arg(arg, int);
-			for (auto& archetype : componentType_archetypesTable.at(componentType))
+			for (auto archetype : componentType_archetypesTable.at(componentType))
 			{
-				archetype.setComponentArray(componentType, componentArrays.at(componentType));
+				archetype->setComponentArray(componentArrays.at(componentType), componentType);
 			}
 		}
 
