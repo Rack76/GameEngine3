@@ -19,11 +19,17 @@ unsigned int TaskManager::registerRepetitiveTask(std::function<void()> function,
 	return taskCounter;
 }
 
+bool TaskManager::cancel(unsigned int taskID)
+{
+	return (tasks.find(taskID) == tasks.end());
+}
+
 void TaskManager::runTasks()
 {
 	for (auto firstPairIt = tasks.begin(); firstPairIt != tasks.end(); firstPairIt++)
 	{
 		firstPairIt->second.run();
+		tasks.erase(firstPairIt->first);
 	}
 
 	for (auto firstPairIt = repetitiveTasks.begin(); firstPairIt != repetitiveTasks.end(); firstPairIt++)
