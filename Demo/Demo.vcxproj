@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{80e5ccf8-8a9d-4b17-8991-c9f62ae93581}</ProjectGuid>
-    <RootNamespace>GameEngine</RootNamespace>
+    <ProjectGuid>{92a4578f-805a-4377-a128-313e55cd717b}</ProjectGuid>
+    <RootNamespace>Demo</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)Demo\lib</OutDir>
+    <LibraryPath>$(ProjectDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -111,6 +111,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>GameEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,25 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Archetype.cpp" />
-    <ClCompile Include="src\ComponentManager.cpp" />
-    <ClCompile Include="src\Engine.cpp" />
-    <ClCompile Include="src\EntityManager.cpp" />
-    <ClCompile Include="src\Math.cpp" />
-    <ClCompile Include="src\TaskManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Archetype.h" />
-    <ClInclude Include="src\Component.h" />
-    <ClInclude Include="src\ComponentManager.h" />
-    <ClInclude Include="src\Engine.h" />
-    <ClInclude Include="src\EntityManager.h" />
-    <ClInclude Include="src\Event.h" />
-    <ClInclude Include="src\EventHandler.h" />
-    <ClInclude Include="src\Math.h" />
-    <ClInclude Include="src\PeriodicDelayedCounter.h" />
-    <ClInclude Include="src\system\System.h" />
-    <ClInclude Include="src\TaskManager.h" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
