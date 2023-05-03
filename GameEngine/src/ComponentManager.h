@@ -4,6 +4,8 @@
 #include <map>
 #include <functional>
 
+enum ComponentTypesMock{MOCK1, MOCK2};
+
 class ComponentManager
 {
 public:

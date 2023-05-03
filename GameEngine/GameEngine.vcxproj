@@ -146,6 +146,8 @@
     <ClInclude Include="src\Event.h" />
     <ClInclude Include="src\EventHandler.h" />
     <ClInclude Include="src\Math.h" />
+    <ClInclude Include="src\Mock1.h" />
+    <ClInclude Include="src\Mock2.h" />
     <ClInclude Include="src\PeriodicDelayedCounter.h" />
     <ClInclude Include="src\system\System.h" />
     <ClInclude Include="src\TaskManager.h" />
