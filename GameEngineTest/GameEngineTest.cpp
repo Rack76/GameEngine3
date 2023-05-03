@@ -25,9 +25,34 @@ namespace GameEngineTest
 			int* pnbExec = &nbExec;
 			unsigned int ID = tskMnger.registerRepetitiveTask([pnbExec]() {(* pnbExec)++; }, 2);
 			tskMnger.runTasks();
+			assert(nbExec == 0);
 			tskMnger.runTasks();
+			assert(nbExec == 0);
 			tskMnger.runTasks();
 			assert(nbExec == 1);
+		}
+
+		TEST_METHOD(TestIfRunRepetitiveTasksRunsTasksPeriodicallyWithDelay)
+		{
+			TaskManager tskMnger;
+			int nbExec = 0;
+			int* pnbExec = &nbExec;
+			unsigned int ID = tskMnger.registerRepetitiveTask([pnbExec]() {(*pnbExec)++; }, 3, 3);
+			tskMnger.runTasks();
+			assert(nbExec == 0);
+			tskMnger.runTasks();
+			assert(nbExec == 0);
+			tskMnger.runTasks();
+			assert(nbExec == 0);
+			for (int i = 0; i < 3; i++)
+			{
+				tskMnger.runTasks();
+				assert(nbExec == i + 1);
+				tskMnger.runTasks();
+				assert(nbExec == i + 1);
+				tskMnger.runTasks();
+				assert(nbExec == i + 1);
+			}
 		}
 	};
 }
