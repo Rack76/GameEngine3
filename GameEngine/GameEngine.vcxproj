@@ -130,28 +130,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Archetype.cpp" />
-    <ClCompile Include="src\ComponentManager.cpp" />
+    <ClCompile Include="src\util\Archetype.cpp" />
+    <ClCompile Include="src\system\ComponentManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
-    <ClCompile Include="src\EntityManager.cpp" />
-    <ClCompile Include="src\Math.cpp" />
-    <ClCompile Include="src\TaskManager.cpp" />
+    <ClCompile Include="src\system\EntityManager.cpp" />
+    <ClCompile Include="src\util\Math.cpp" />
+    <ClCompile Include="src\util\TaskManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Archetype.h" />
-    <ClInclude Include="src\Component.h" />
-    <ClInclude Include="src\ComponentManager.h" />
-    <ClInclude Include="src\DelayedCounter.h" />
+    <ClInclude Include="src\util\Archetype.h" />
+    <ClInclude Include="src\component\Component.h" />
+    <ClInclude Include="src\system\ComponentManager.h" />
+    <ClInclude Include="src\util\DelayedCounter.h" />
     <ClInclude Include="src\Engine.h" />
-    <ClInclude Include="src\EntityManager.h" />
-    <ClInclude Include="src\Event.h" />
-    <ClInclude Include="src\EventHandler.h" />
-    <ClInclude Include="src\Math.h" />
-    <ClInclude Include="src\Mock1.h" />
-    <ClInclude Include="src\Mock2.h" />
-    <ClInclude Include="src\PeriodicDelayedCounter.h" />
+    <ClInclude Include="src\system\EntityManager.h" />
+    <ClInclude Include="src\util\Event.h" />
+    <ClInclude Include="src\util\EventHandler.h" />
+    <ClInclude Include="src\util\Math.h" />
+    <ClInclude Include="src\component\Mock1.h" />
+    <ClInclude Include="src\component\Mock2.h" />
+    <ClInclude Include="src\util\PeriodicDelayedCounter.h" />
     <ClInclude Include="src\system\System.h" />
-    <ClInclude Include="src\TaskManager.h" />
+    <ClInclude Include="src\util\TaskManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -46,3 +46,18 @@ void Archetype::destroyArchetype() {
 		}
 	}
 }
+
+void Archetype::destroyEntity(int index)
+{
+	try {
+		for (auto componentArray = componentArrays.begin(); componentArray != componentArrays.end(); )
+		{
+			delete componentArray->second.at(index);
+			componentArray->second.erase(componentArray->second.begin() + index);
+		}
+	}
+	
+	catch (const std::exception& e) {
+		std::cerr << e.what();
+	}
+}

@@ -1,5 +1,5 @@
 #include "CppUnitTest.h"
-#include "../GameEngine/src/TaskManager.h"
+#include "../GameEngine/src/util/TaskManager.h"
 #include <cassert>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

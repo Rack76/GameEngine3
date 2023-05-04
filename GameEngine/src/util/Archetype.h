@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Component.h"
+#include "../component/Component.h"
 #include <vector>
 #include <map>
 
@@ -12,6 +12,7 @@ public:
 	std::vector<Component*> getComponents(int);
 
 	void destroyArchetype();
+	void destroyEntity(int);
 	
 	int getSize() {
 		auto it = componentArrays.begin();
