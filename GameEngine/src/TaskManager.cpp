@@ -26,8 +26,13 @@ void TaskManager::runTasks()
 {
 	for (auto firstPairIt = tasks.begin(); firstPairIt != tasks.end(); )
 	{
-		firstPairIt->second.run();
-		firstPairIt = tasks.erase(firstPairIt);
+		if (firstPairIt->second.canRun())
+		{
+			firstPairIt->second.run();
+			firstPairIt = tasks.erase(firstPairIt);
+		}
+		else
+			firstPairIt++;
 	}
 
 	for (auto firstPairIt = repetitiveTasks.begin(); firstPairIt != repetitiveTasks.end(); std::advance(firstPairIt, 1))

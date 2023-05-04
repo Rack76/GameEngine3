@@ -6,8 +6,8 @@
 
 void ComponentManager::init()
 {
-	constructors.insert({ ComponentTypesMock::MOCK1, []()->Component* {return new Mock1(); } });
-	constructors.insert({ ComponentTypesMock::MOCK2, []()->Component* {return new Mock2(); } });
+	constructors.insert({ (int)ComponentTypesMock::MOCK1, []()->Component* {return new Mock1(); } });
+	constructors.insert({ (int)ComponentTypesMock::MOCK2, []()->Component* {return new Mock2(); } });
 }
 
 Component* ComponentManager::createComponent(int componentType)

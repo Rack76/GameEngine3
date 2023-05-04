@@ -3,16 +3,21 @@
 #include<list>
 #include <vector>
 #include <functional>
+#include "DelayedCounter.h"
 #include "PeriodicDelayedCounter.h"
 
 struct Task {
 	Task(std::function<void()> function,
 		unsigned long delay,
 		unsigned long duration,
-		bool async): function(function), delay(delay), duration(duration), async(async) {}
+		bool async): function(function), delay(delay), duration(duration), async(async), dc(DelayedCounter(delay)) {}
 
 	void run() {
 		function();
+	}
+
+	virtual bool canRun() {
+		return dc.canRun();
 	}
 
 protected:
@@ -20,10 +25,10 @@ protected:
 	unsigned long delay;
 	unsigned long duration;
 	bool async;
+	DelayedCounter dc;
 };
 
 struct RepetitiveTask : public Task{
-public:
 	RepetitiveTask(std::function<void()> function,
 		unsigned long delay,
 		unsigned long duration,

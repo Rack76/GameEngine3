@@ -18,6 +18,22 @@ namespace GameEngineTest
 			assert(tskMnger.cancel(ID));
 		}
 
+		TEST_METHOD(TestIfRunTasksRunsTasksWithDelay)
+		{
+			TaskManager tskMnger;
+			int nbExec = 0;
+			int* pnbExec = &nbExec;
+			tskMnger.registerTask([pnbExec]() {(*pnbExec)++; }, 3);
+			tskMnger.runTasks();
+			assert(nbExec == 0);
+			tskMnger.runTasks();
+			assert(nbExec == 0);
+			tskMnger.runTasks();
+			assert(nbExec == 0);
+			tskMnger.runTasks();
+			assert(nbExec == 1);
+		}
+
 		TEST_METHOD(TestIfRunRepetitiveTasksRunsTasksWithDelay)
 		{
 			TaskManager tskMnger;

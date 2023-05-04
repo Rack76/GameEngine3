@@ -11,6 +11,15 @@ public:
 	void setComponentArray(std::vector<Component*>, int);
 	std::vector<Component*> getComponents(int);
 
+	void destroyArchetype();
+	
+	int getSize() {
+		auto it = componentArrays.begin();
+		if(!componentArrays.empty())
+			return componentArrays.at(it->first).size();
+		return 0;
+	}
+
 private:
 	std::map<int, std::vector<Component*>> componentArrays;
 };

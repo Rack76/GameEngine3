@@ -33,3 +33,16 @@ std::vector<Component*> Archetype::getComponents(int index)
 
 	return components;
 }
+
+void Archetype::destroyArchetype() {
+	auto it = componentArrays.begin();
+	for (auto& componentArray = it; componentArray != componentArrays.end();)
+	{
+		std::vector<Component*>* components = &componentArray->second;
+		componentArray = componentArrays.erase(componentArray);
+		for (auto& component : *components)
+		{
+			delete component;
+		}
+	}
+}

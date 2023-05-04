@@ -141,6 +141,7 @@
     <ClInclude Include="src\Archetype.h" />
     <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\ComponentManager.h" />
+    <ClInclude Include="src\DelayedCounter.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EntityManager.h" />
     <ClInclude Include="src\Event.h" />

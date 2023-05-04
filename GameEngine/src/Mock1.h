@@ -4,5 +4,6 @@
 
 class Mock1 : public Component
 {
-
+public:
+	int data = 0;
 };

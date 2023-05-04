@@ -4,5 +4,5 @@
 
 class Mock2 : public Component
 {
-
+	int data = 0;
 };
