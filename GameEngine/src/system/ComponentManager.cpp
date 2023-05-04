@@ -16,7 +16,7 @@ void ComponentManager::init()
 template <class T>
 void ComponentManager::addComponentType()
 {
-	componentConstructors.insert({ componentTypeCount , []()-> Component* {return new T} });
+	componentConstructors.insert({ componentTypeCount , []()-> Component* {return new T; } });
 	componentTypeCount * 2;
 }
 
