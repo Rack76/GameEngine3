@@ -144,8 +144,9 @@
     <ClInclude Include="src\util\DelayedCounter.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\system\EntityManager.h" />
-    <ClInclude Include="src\util\Event.h" />
-    <ClInclude Include="src\util\EventHandler.h" />
+    <ClInclude Include="src\util\event\Events.h" />
+    <ClInclude Include="src\util\event\Event.h" />
+    <ClInclude Include="src\util\event\EventHandler.h" />
     <ClInclude Include="src\util\Math.h" />
     <ClInclude Include="src\component\Mock1.h" />
     <ClInclude Include="src\component\Mock2.h" />

@@ -3,18 +3,18 @@
 #include <functional>
 #include "EventHandler.h"
 
-template<typename T>
+template<typename T, typename ...Types >
 class Event
 {
 public:
-	static void registerListener(const std::function<void(T)>& listener)
+	static void registerListener(const std::function<void(Types ...args)>& listener)
 	{
 		handler().registerListener(listener);
 	}
 
-	static void call(T event)
+	static void call( Types ...args)
 	{
-		handler().call(event);
+		handler().call(args);
 	}
 
 private:

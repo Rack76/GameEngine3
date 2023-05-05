@@ -13,4 +13,6 @@ public:
 private:
 	std::vector<System> systems;
 	TaskManager taskManager;
+	bool shouldRun = true;
+	
 };

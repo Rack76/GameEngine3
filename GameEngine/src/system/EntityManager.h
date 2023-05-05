@@ -19,7 +19,12 @@ public:
 	void destroyEntity(int entityType, int index);
 	void updateArchetypes(std::map<int, std::vector<Component*>> componentArrays, int count, ...);
 
-	void addEntityType(unsigned long, ...);
+	template <typename ...Types>
+	void addEntityType(int entityType, Types ... args)
+	{
+		componentManager->linkComponents(entityType, args...);
+	}
+
 
 	int getEntityCount(int entityType) {
 		return entityType_archetypeTable.at(entityType).getSize();
@@ -32,7 +37,7 @@ public:
 		}
 		return size;
 	}
-	std::vector<Component*>& getComponents(int entityType, int index);
+	std::map<int, Component*> getComponents(int entityType, int index);
 
 	~EntityManager(){}
 private:

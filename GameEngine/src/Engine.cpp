@@ -1,4 +1,6 @@
 #include "Engine.h"
+#include "util/event/Events.h"
+#include <string>
 
 void Engine::init()
 {
@@ -6,6 +8,9 @@ void Engine::init()
 	//instantiate systems
 	//add entity types to systems
 	//add entities
+	bool* pshouldRun = &shouldRun;
+	std::function<void()> func = [pshouldRun]() {*pshouldRun = false; };
+	EscPress::registerListener(func);
 }
 
 void Engine::run()
@@ -13,7 +18,7 @@ void Engine::run()
 	//loop w exit condition
 		//tasks update (Task Sheduler/Manager)
 
-	while (true) //TODO exit condtion
+	while (shouldRun) //TODO exit condtion
 	{
 		taskManager.runTasks();
 

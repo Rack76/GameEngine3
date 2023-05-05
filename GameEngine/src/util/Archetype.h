@@ -9,7 +9,7 @@ class Archetype
 public:
 	void addComponent(Component*, int);
 	void setComponentArray(std::vector<Component*>, int);
-	std::vector<Component*> getComponents(int);
+	std::map<int, Component*> getComponents(int);
 
 	void destroyArchetype();
 	void destroyEntity(int);

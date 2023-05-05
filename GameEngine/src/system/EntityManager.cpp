@@ -45,18 +45,16 @@ void EntityManager::destroyEntity(int entityType, int index)
 	}
 }
 
-std::vector<Component*>& EntityManager::getComponents(int entityType, int index)
+std::map<int, Component*> EntityManager::getComponents(int entityType, int index)
 {
-	std::vector<Component*> components;
 	try {
-		components = entityType_archetypeTable.at(entityType).getComponents(index);
+		std::map<int, Component*> components = entityType_archetypeTable.at(entityType).getComponents(index);
+		return components;
 	}
 
 	catch (const std::exception& e) {
 		std::cerr << e.what();
 	}
-
-	return components;
 }
 
 void EntityManager::updateArchetypes(std::map<int, std::vector<Component*>> componentArrays, int count, ...)
@@ -79,12 +77,4 @@ void EntityManager::updateArchetypes(std::map<int, std::vector<Component*>> comp
 	catch(const std::exception &e) {
 		std::cerr << e.what();
 	}
-}
-
-
-void EntityManager::addEntityType(unsigned long entityType, ...)
-{
-	va_list list;
-	va_start(list, entityType);
-	componentManager->linkComponents(entityType, list, -1);
 }

@@ -16,14 +16,14 @@ void Archetype::setComponentArray(std::vector<Component*> componentArray, int co
 	}
 }
 
-std::vector<Component*> Archetype::getComponents(int index)
+std::map<int, Component*> Archetype::getComponents(int index)
 {
-	std::vector<Component*> components;
+	std::map<int, Component*> components;
 
 	try {
 		for (auto componentArray : componentArrays)
 		{
-			components.push_back(componentArray.second.at(index));
+			components.insert({ componentArray.first, componentArray.second.at(index) });
 		}
 	}
 
@@ -50,7 +50,7 @@ void Archetype::destroyArchetype() {
 void Archetype::destroyEntity(int index)
 {
 	try {
-		for (auto componentArray = componentArrays.begin(); componentArray != componentArrays.end(); )
+		for (auto componentArray = componentArrays.begin(); componentArray != componentArrays.end(); componentArray++)
 		{
 			delete componentArray->second.at(index);
 			componentArray->second.erase(componentArray->second.begin() + index);
