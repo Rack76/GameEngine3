@@ -3,7 +3,7 @@
 #include <functional>
 #include <vector>
 
-template<typename ...Types>
+template<typename T, typename ...Types>
 class EventHandler
 {
 public:
