@@ -3,20 +3,18 @@
 #include <functional>
 #include <vector>
 
-template<typename T, typename ...Types>
-class EventHandler
-{
+template<class ...T>
+class EventHandler {
 public:
-	void registerListener(const std::function<void(Types ... args)> listener)
+	void call(T... event)
+	{
+		for (int i = 0; i < listeners.size(); i++)
+			listeners[i](event...);
+	}
+	void registerListener(const std::function<void(T...)>& listener)
 	{
 		listeners.push_back(listener);
 	}
-
-	void call(Types ...args)
-	{
-		for (int i = 0; i < listeners.size(); i++)
-			listeners[i](args);
-	}
 private:
-	std::vector<std::function<void(Types ...args)>> listeners;
+	std::vector<std::function<void(T...)>> listeners;
 };

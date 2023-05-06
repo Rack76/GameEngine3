@@ -3,24 +3,21 @@
 #include <functional>
 #include "EventHandler.h"
 
-template<typename T, typename ...Types >
-class Event
-{
+template<class dif, class ...T>
+class Event {
 public:
-	static void registerListener(const std::function<void(Types ...args)>& listener)
+	static void call(T... event)
+	{
+		handler().call(event...);
+	}
+	static void registerListener(const std::function<void(T...)>& listener)
 	{
 		handler().registerListener(listener);
 	}
-
-	static void call( Types ...args)
-	{
-		handler().call(args);
-	}
-
 private:
-	static EventHandler<T>& handler()
+	static EventHandler<T...>& handler()
 	{
-		static EventHandler<T> eventHandler;
-		return eventHandler;
+		static EventHandler<T...> eh;
+		return eh;
 	}
 };
