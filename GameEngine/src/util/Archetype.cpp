@@ -1,12 +1,12 @@
 #include "Archetype.h"
 #include <iostream>
 
-void Archetype::addComponent(Component* component, int componentType)
+void Archetype::addComponent(IComponent* component, int componentType)
 {
 	componentArrays[componentType].push_back(component);
 }
 
-void Archetype::setComponentArray(std::vector<Component*> componentArray, int componentType)
+void Archetype::setComponentArray(std::vector<IComponent*> componentArray, int componentType)
 {
 	try {
 		componentArrays.at(componentType) = componentArray;
@@ -16,9 +16,9 @@ void Archetype::setComponentArray(std::vector<Component*> componentArray, int co
 	}
 }
 
-std::map<int, Component*> Archetype::getComponents(int index)
+std::map<int, IComponent*> Archetype::getComponents(int index)
 {
-	std::map<int, Component*> components;
+	std::map<int, IComponent*> components;
 
 	try {
 		for (auto componentArray : componentArrays)
@@ -38,7 +38,7 @@ void Archetype::destroyArchetype() {
 	auto it = componentArrays.begin();
 	for (auto& componentArray = it; componentArray != componentArrays.end();)
 	{
-		std::vector<Component*>* components = &componentArray->second;
+		std::vector<IComponent*>* components = &componentArray->second;
 		componentArray = componentArrays.erase(componentArray);
 		for (auto& component : *components)
 		{

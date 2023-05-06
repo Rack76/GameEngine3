@@ -15,7 +15,7 @@ void EntityManager::init()
 void EntityManager::addEntity(int entityType)
 {
 	try {
-		std::vector<std::pair<int, Component*>> components = componentManager->constructComponents(entityType);
+		std::vector<std::pair<int, IComponent*>> components = componentManager->constructComponents(entityType);
 		for (auto & c : components)
 		{
 			entityType_archetypeTable[entityType].addComponent(c.second, c.first);
@@ -45,10 +45,10 @@ void EntityManager::destroyEntity(int entityType, int index)
 	}
 }
 
-std::map<int, Component*> EntityManager::getComponents(int entityType, int index)
+std::map<int, IComponent*> EntityManager::getComponents(int entityType, int index)
 {
 	try {
-		std::map<int, Component*> components = entityType_archetypeTable.at(entityType).getComponents(index);
+		std::map<int, IComponent*> components = entityType_archetypeTable.at(entityType).getComponents(index);
 		return components;
 	}
 
@@ -57,7 +57,19 @@ std::map<int, Component*> EntityManager::getComponents(int entityType, int index
 	}
 }
 
-void EntityManager::updateArchetypes(std::map<int, std::vector<Component*>> componentArrays, int count, ...)
+IComponent* EntityManager::getComponent(int entityType, int index, int componentType)
+{
+	try {
+		std::map<int, IComponent*> components = entityType_archetypeTable.at(entityType).getComponents(index);
+		return components.at(componentType);
+	}
+
+	catch (const std::exception& e) {
+		std::cerr << e.what();
+	}
+}
+
+void EntityManager::updateArchetypes(std::map<int, std::vector<IComponent*>> componentArrays, int count, ...)
 {
 	try {
 		va_list arg;

@@ -19,7 +19,7 @@ public:
 	void linkComponents(int entityType, T arg, Types ...args) {
 		try {
 			int componentType = arg;
-			entityType_componentConstructorsTable[entityType].push_back(std::pair<int, std::function<Component* ()>>(componentType, componentConstructors.at(componentType)));
+			entityType_componentConstructorsTable[entityType].push_back(std::pair<int, std::function<IComponent* ()>>(componentType, componentConstructors.at(componentType)));
 			linkComponents(entityType, args...);
 		}
 		catch (const std::exception& e) {
@@ -29,16 +29,16 @@ public:
 
 	void linkComponents(int);
 
-	std::vector<std::pair<int, Component*>> constructComponents(int entityType);
+	std::vector<std::pair<int, IComponent*>> constructComponents(int entityType);
 
 	template <class T>
 	void addComponentType()
 	{
-		componentConstructors.insert({ componentTypeCount , []()-> Component* {return new T; } });
+		componentConstructors.insert({ componentTypeCount , []()-> IComponent* {return new T; } });
 		componentTypeCount ++;
 	}
 private:
-	std::map<int, std::function<Component* (void)>> componentConstructors;
-	std::map<int, std::vector<std::pair<int, std::function<Component* (void)>>>> entityType_componentConstructorsTable;
+	std::map<int, std::function<IComponent* (void)>> componentConstructors;
+	std::map<int, std::vector<std::pair<int, std::function<IComponent* (void)>>>> entityType_componentConstructorsTable;
 	unsigned long componentTypeCount = 0;
 };

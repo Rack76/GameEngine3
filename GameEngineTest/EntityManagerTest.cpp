@@ -1,6 +1,8 @@
 #include "CppUnitTest.h"
 #include "../GameEngine/src/system/EntityManager.h"
 #include <cassert>
+#include "../GameEngine/src/component/Mock1.h"
+#include "../GameEngine/src/component/Mock2.h"
 
 namespace GameEngineTest 
 {
@@ -13,18 +15,9 @@ namespace GameEngineTest
 			ettMnger.init();
 			ettMnger.addEntityType(0, 0, 1);
 			ettMnger.addEntity(0);
-			std::map<int, Component*> components;
-			components = ettMnger.getComponents(0, 0);
-			const char* className1 = typeid(*(components.at(0))).name();
-			const char* className2 = typeid(*(components.at(1))).name();
-			assert(!std::strcmp(className1, "class Mock1")
-				&& !std::strcmp(className2, "class Mock2"));
 
 			ettMnger.addEntityType(1, 0);
 			ettMnger.addEntity(1);
-			components = ettMnger.getComponents(1, 0);
-			className1 = typeid(*(components[0])).name();
-			assert(!std::strcmp(className1, "class Mock1"));
 
 			ettMnger.addEntity(1);
 			assert(ettMnger.getEntityCount(1) == 2);

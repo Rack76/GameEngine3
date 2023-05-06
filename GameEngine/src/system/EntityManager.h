@@ -17,7 +17,7 @@ public:
 	void addEntity(int entityType);
 	void destroyAllEntities();
 	void destroyEntity(int entityType, int index);
-	void updateArchetypes(std::map<int, std::vector<Component*>> componentArrays, int count, ...);
+	void updateArchetypes(std::map<int, std::vector<IComponent*>> componentArrays, int count, ...);
 
 	template <typename ...Types>
 	void addEntityType(int entityType, Types ... args)
@@ -37,7 +37,8 @@ public:
 		}
 		return size;
 	}
-	std::map<int, Component*> getComponents(int entityType, int index);
+	std::map<int, IComponent*> getComponents(int entityType, int index);
+	IComponent* getComponent(int entityType, int index, int ComponentType);
 
 	~EntityManager(){}
 private:

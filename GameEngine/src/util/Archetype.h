@@ -7,9 +7,9 @@
 class Archetype
 {
 public:
-	void addComponent(Component*, int);
-	void setComponentArray(std::vector<Component*>, int);
-	std::map<int, Component*> getComponents(int);
+	void addComponent(IComponent*, int);
+	void setComponentArray(std::vector<IComponent*>, int);
+	std::map<int, IComponent*> getComponents(int);
 
 	void destroyArchetype();
 	void destroyEntity(int);
@@ -22,5 +22,5 @@ public:
 	}
 
 private:
-	std::map<int, std::vector<Component*>> componentArrays;
+	std::map<int, std::vector<IComponent*>> componentArrays;
 };

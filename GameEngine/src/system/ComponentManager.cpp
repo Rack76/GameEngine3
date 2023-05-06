@@ -16,13 +16,13 @@ void ComponentManager::linkComponents(int entityType) {
 	return;
 }
 
-std::vector<std::pair<int, Component*>> ComponentManager::constructComponents(int entityType) {
-	std::vector<std::pair<int, Component*>> vec;
+std::vector<std::pair<int, IComponent*>> ComponentManager::constructComponents(int entityType) {
+	std::vector<std::pair<int, IComponent*>> vec;
 	try {
 		for (auto f : entityType_componentConstructorsTable[entityType])
 		{
 			
-			vec.push_back(std::pair<int, Component*>({f.first, f.second()}));
+			vec.push_back(std::pair<int, IComponent*>({f.first, f.second()}));
 		}
 
 		return vec;

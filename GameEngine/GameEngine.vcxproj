@@ -138,6 +138,7 @@
     <ClCompile Include="src\util\TaskManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\component\IComponent.h" />
     <ClInclude Include="src\util\Archetype.h" />
     <ClInclude Include="src\component\Component.h" />
     <ClInclude Include="src\system\ComponentManager.h" />
