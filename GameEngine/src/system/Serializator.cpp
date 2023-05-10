@@ -1,7 +1,5 @@
 #include "Serializator.h"
 #include <vector>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 #include <fstream>
 
 void Serializator::init(){
