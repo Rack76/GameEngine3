@@ -4,7 +4,7 @@
 void Parser::deserialize(std::string filename)
 {
 	try {
-	std::ifstream file("entities.txt");
+	std::ifstream file(filename);
 	if (file.eof())
 		throw std::exception();
 	std::string str;
@@ -30,39 +30,17 @@ void Parser::deserialize(std::string filename)
 			file >> componentType;
 		}
 		else{
-			std::vector<char> c;
-			int size;
-			std::vector<std::vector<char>> temp;
-			char* dynamicArray;
-			int index = -1;
-			int loops = 0;
-			while (1) {
+			std::vector<std::string> stringArray;
+			std::string str;
+			int index = 0;
 				do {
-					c.push_back(file.get());
-					index++;
-				} while (loops++, (c[index] != ' ') && (c[index] != '\n') && (c[index] != '*'));
-				if (c[index] == '*')
-				{
-					c.pop_back();
-					size = c.size();
-					temp.push_back(c);
-					break;
-				}
-				if (c[index] == ' ' || c[index] == '\n')
-				{
-					c.pop_back();
-					index--;
-					continue;
-				}
-			}
-			dynamicArray = new char[size];
-			for (int i = 0; i < c.size(); i++)
-			{
-				dynamicArray[i] = c[i];
-			}
+					file >> str;
+					stringArray.push_back(str);
+				} while (index++, str != "*");
+				index--;
+			stringArray.pop_back();
 			IComponent* component = ettMnger->getComponent(entityType, i[entityType], componentType);
-			((Component*)component)->deserialize(dynamicArray, size);
-				delete[] dynamicArray;
+			((Component*)component)->deserialize(stringArray);
 		}
 	}
 	}

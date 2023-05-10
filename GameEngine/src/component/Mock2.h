@@ -8,9 +8,9 @@ public:
 	int data = 3;
 	char data2 = 1;
 
-	void deserialize(char* dynamicArray, int size) {
-		data = (int)(dynamicArray[0]);
-		data2 = (char)(dynamicArray[0]);
+	void deserialize(std::vector<std::string> strings) {
+		data = std::stoi(strings[0]);
+		data2 = strings[1][0];
 	}
 
 	void serialize(std::ofstream& file) {
