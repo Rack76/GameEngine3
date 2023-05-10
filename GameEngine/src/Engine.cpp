@@ -8,9 +8,11 @@ void Engine::init()
 	//instantiate systems
 	//add entity types to systems
 	//add entities
+
 	bool* pshouldRun = &shouldRun;
 	const std::function<void()> func = [pshouldRun]() {*pshouldRun = false; };
 	EscPress::registerListener(func);
+
 }
 
 void Engine::run()

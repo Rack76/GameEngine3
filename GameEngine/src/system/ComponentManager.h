@@ -35,10 +35,21 @@ public:
 	void addComponentType()
 	{
 		componentConstructors.insert({ componentTypeCount , []()-> IComponent* {return new T; } });
-		componentTypeCount ++;
+		componentTypeCount++;
 	}
+
+	static constexpr int getMaxComponentTypeCount() {
+		return maxComponentTypeCount;
+	}
+
+	template <typename ...Types>
+	std::function < Component(int, IComponent*)> getComponentSubClass() {
+
+	}
+
 private:
+	static const int maxComponentTypeCount = 20;
 	std::map<int, std::function<IComponent* (void)>> componentConstructors;
 	std::map<int, std::vector<std::pair<int, std::function<IComponent* (void)>>>> entityType_componentConstructorsTable;
-	unsigned long componentTypeCount = 0;
+    int componentTypeCount = 0;
 };

@@ -72,6 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Demo\lib</OutDir>
+    <IncludePath>$(ProjetDir)include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -107,6 +108,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <UndefinePreprocessorDefinitions>BOOST_ASIO_SEPARATE_COMPILATION </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,15 +133,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\system\Serializator.cpp" />
     <ClCompile Include="src\util\Archetype.cpp" />
     <ClCompile Include="src\system\ComponentManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\system\EntityManager.cpp" />
     <ClCompile Include="src\util\Math.cpp" />
+    <ClCompile Include="src\util\Parser.cpp" />
     <ClCompile Include="src\util\TaskManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\component\IComponent.h" />
+    <ClInclude Include="src\game\Game.h" />
+    <ClInclude Include="src\game\GameMode.h" />
+    <ClInclude Include="src\system\Serializator.h" />
     <ClInclude Include="src\util\Archetype.h" />
     <ClInclude Include="src\component\Component.h" />
     <ClInclude Include="src\system\ComponentManager.h" />
@@ -151,9 +159,13 @@
     <ClInclude Include="src\util\Math.h" />
     <ClInclude Include="src\component\Mock1.h" />
     <ClInclude Include="src\component\Mock2.h" />
+    <ClInclude Include="src\util\Parser.h" />
     <ClInclude Include="src\util\PeriodicDelayedCounter.h" />
     <ClInclude Include="src\system\System.h" />
     <ClInclude Include="src\util\TaskManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\entity\entities.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

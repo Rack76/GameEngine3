@@ -1,5 +1,6 @@
 #include "Archetype.h"
 #include <iostream>
+#include <string>
 
 void Archetype::addComponent(IComponent* component, int componentType)
 {
@@ -61,3 +62,41 @@ void Archetype::destroyEntity(int index)
 		std::cerr << e.what();
 	}
 }
+
+void Archetype::serialize(std::ofstream &file, int entityType)
+{
+	int entityCount = componentArrays.begin()->second.size();
+	int entityIndex = 0;
+	if (entityCount != 0)
+	{
+		int componentTypeCount = componentArrays.size();
+		for (int a = 0; a < entityCount; a++)
+		{
+			auto componentArry = componentArrays.begin();
+			file << "ENTITY" << '\n' << entityType << '\n';
+			for (int i = 0; i < componentTypeCount; i++)
+			{
+				file << "COMPONENT " << componentArry->first << ' ' << '*' << '\n';
+				((Component*)(componentArry->second[entityIndex]))->serialize(file);
+				file << ' ' << '*' << '\n';
+				std::advance(componentArry, 1);
+			}
+			entityIndex++;
+		}
+	}
+}
+
+bool Archetype::operator<(Archetype& archetype) {
+	if (componentArrays.size() < archetype.componentArrays.size())
+	{
+		for (auto& componentArray : componentArrays)
+		{
+			if (archetype.componentArrays.find(componentArray.first) == archetype.componentArrays.end())
+				return false;
+		}
+		return true;
+	}
+	else
+		return false;
+}
+

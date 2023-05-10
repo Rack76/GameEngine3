@@ -1,11 +1,13 @@
 #pragma once
 
 #include "IComponent.h"
+#include <vector>
+#include <fstream>
 
-template <typename ...Types>
 class Component : public IComponent
 {
 public:
-	virtual void setData(Types ...args){}
+	virtual void deserialize(char* dynamicArray, int size) = 0;
+	virtual void serialize(std::ofstream&) = 0;
 	virtual ~Component(){}
 };

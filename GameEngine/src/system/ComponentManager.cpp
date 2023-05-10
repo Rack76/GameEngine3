@@ -19,7 +19,7 @@ void ComponentManager::linkComponents(int entityType) {
 std::vector<std::pair<int, IComponent*>> ComponentManager::constructComponents(int entityType) {
 	std::vector<std::pair<int, IComponent*>> vec;
 	try {
-		for (auto f : entityType_componentConstructorsTable[entityType])
+		for (auto f : entityType_componentConstructorsTable.at(entityType))
 		{
 			
 			vec.push_back(std::pair<int, IComponent*>({f.first, f.second()}));
