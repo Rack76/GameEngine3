@@ -43,7 +43,17 @@ namespace GameEngineTest
 			ettMnger.destroyAllEntities();
 			Parser parser(&ettMnger);
 			parser.deserialize("mesEntites.txt");
+			int n = ettMnger.getEntityCount();
+			assert(n == 4);
 			ettMnger.addEntity(2);
+			ettMnger.addEntity(2);
+			n = ettMnger.getEntityCount();
+			assert(n == 6);
+			ettMnger.serialize("mesEntites.txt");
+			ettMnger.destroyAllEntities();
+			parser.deserialize("mesEntites.txt");
+			n = ettMnger.getEntityCount();
+			assert(n == 6);
 		}
 	};
 }

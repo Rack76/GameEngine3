@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\system\Input.cpp" />
+    <ClCompile Include="src\system\Renderer.cpp" />
     <ClCompile Include="src\system\Serializator.cpp" />
     <ClCompile Include="src\util\Archetype.cpp" />
     <ClCompile Include="src\system\ComponentManager.cpp" />
@@ -141,11 +143,14 @@
     <ClCompile Include="src\util\Math.cpp" />
     <ClCompile Include="src\util\Parser.cpp" />
     <ClCompile Include="src\util\TaskManager.cpp" />
+    <ClCompile Include="src\util\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\component\IComponent.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\game\GameMode.h" />
+    <ClInclude Include="src\system\Input.h" />
+    <ClInclude Include="src\system\Renderer.h" />
     <ClInclude Include="src\system\Serializator.h" />
     <ClInclude Include="src\util\Archetype.h" />
     <ClInclude Include="src\component\Component.h" />
@@ -163,6 +168,7 @@
     <ClInclude Include="src\util\PeriodicDelayedCounter.h" />
     <ClInclude Include="src\system\System.h" />
     <ClInclude Include="src\util\TaskManager.h" />
+    <ClInclude Include="src\util\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\entity\entities.txt" />
