@@ -5,6 +5,7 @@
 #include <type_traits>
 #include <vector>
 #include <map>
+#include <sstream>
 
 class Archetype
 {
@@ -52,6 +53,9 @@ public:
 	}
 
 	void serialize(std::ofstream& filename, int entityType);
+	void serialize(std::ofstream& file, int entityType, int entity);
+
+	void serialize_ss(int);
 
 	bool operator<(Archetype& archetype);
 private:

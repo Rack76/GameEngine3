@@ -17,6 +17,10 @@ public:
 		file << data << ' ' << data2;
 	}
 
+	void serialize(std::ostringstream& oss) {
+		oss << data << ' ' << data2;
+	}
+
 	~Mock1() {}
 
 private:

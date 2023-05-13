@@ -79,3 +79,15 @@ void EntityManager::serialize(std::string filename) {
 		archetype.second->serialize(file, archetype.first);
 	}
 }
+
+void EntityManager::serialize_ss() {
+	for (auto archetype : entityType_archetypeTable)
+	{
+		archetype.second->serialize_ss(archetype.first);
+	}
+}
+
+void EntityManager::serialize(std::string filename, int entityType, int entity) {
+	std::ofstream file(filename, std::ios_base::app);
+	entityType_archetypeTable.at(entityType)->serialize(file, entityType, entity);
+}

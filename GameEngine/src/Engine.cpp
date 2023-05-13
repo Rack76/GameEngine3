@@ -17,6 +17,7 @@ void Engine::init()
 	ettMngr = new EntityManager();
 	taskManager = new TaskManager();
 	serializator = new Serializator(ettMngr);
+	parser = new Parser(ettMngr);
 
 	renderer->init();
 	input->init();

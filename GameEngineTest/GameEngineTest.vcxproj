@@ -163,7 +163,11 @@
   <ItemGroup>
     <ClCompile Include="EntityManagerTest.cpp" />
     <ClCompile Include="GameEngineTest.cpp" />
+    <ClCompile Include="Mat3Test.cpp" />
+    <ClCompile Include="MathTest.cpp" />
     <ClCompile Include="ParserTest.cpp" />
+    <ClCompile Include="PlaneTest.cpp" />
+    <ClCompile Include="Vec3Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameEngine\GameEngine.vcxproj">

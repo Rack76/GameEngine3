@@ -7,6 +7,7 @@
 #include "ComponentManager.h"
 #include <exception>
 #include <iostream>
+#include <sstream>
 
 enum class EntityTypes{ MOCK1, 
 					    MOCK2, 
@@ -81,6 +82,9 @@ public:
 	}
 
 	void serialize(std::string filename);
+	void serialize(std::string filename, int entityType, int entity);
+
+	void serialize_ss();
 
 	static constexpr int getComponentTypeCount() {
 		return ComponentManager::getMaxComponentTypeCount();

@@ -140,7 +140,8 @@
     <ClCompile Include="src\system\ComponentManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\system\EntityManager.cpp" />
-    <ClCompile Include="src\util\Math.cpp" />
+    <ClCompile Include="src\util\math\Math.cpp" />
+    <ClCompile Include="src\util\math\Vec4.cpp" />
     <ClCompile Include="src\util\Parser.cpp" />
     <ClCompile Include="src\util\TaskManager.cpp" />
     <ClCompile Include="src\util\WindowManager.cpp" />
@@ -161,9 +162,13 @@
     <ClInclude Include="src\util\event\Events.h" />
     <ClInclude Include="src\util\event\Event.h" />
     <ClInclude Include="src\util\event\EventHandler.h" />
-    <ClInclude Include="src\util\Math.h" />
+    <ClInclude Include="src\util\math\Mat3.h" />
+    <ClInclude Include="src\util\math\Math.h" />
     <ClInclude Include="src\component\Mock1.h" />
     <ClInclude Include="src\component\Mock2.h" />
+    <ClInclude Include="src\util\math\Plane.h" />
+    <ClInclude Include="src\util\math\Vec3.h" />
+    <ClInclude Include="src\util\math\Vec4.h" />
     <ClInclude Include="src\util\Parser.h" />
     <ClInclude Include="src\util\PeriodicDelayedCounter.h" />
     <ClInclude Include="src\system\System.h" />

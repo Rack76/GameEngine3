@@ -5,6 +5,7 @@
 #include "system/EntityManager.h"
 #include "System/Serializator.h"
 #include "util/TaskManager.h"
+#include "util/Parser.h"
 #include <vector>
 
 class Engine
@@ -18,13 +19,15 @@ public:
 	void run();
 	void terminate();
 
-private:
 	EntityManager* ettMngr;
+	WindowManager* wndMngr;
+	Parser* parser;
+
+private:
 	Input* input;
 	Renderer* renderer;
 	Serializator* serializator;
 	TaskManager* taskManager;
-	WindowManager* wndMngr;
 	bool shouldRun = true;
 	
 };
