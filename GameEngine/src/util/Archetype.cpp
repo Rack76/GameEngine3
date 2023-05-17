@@ -103,9 +103,8 @@ void Archetype::serialize(std::ofstream& file, int entityType, int entity) {
 	}
 }
 
-void Archetype::serialize_ss(int entityType)
+void Archetype::serialize_oss(int entityType, std::ostringstream & oss)
 {
-	std::ostringstream ossName;
 	int entityCount = componentArrays.begin()->second.size();
 	int entityIndex = 0;
 	if (entityCount != 0)
@@ -114,17 +113,31 @@ void Archetype::serialize_ss(int entityType)
 		for (int a = 0; a < entityCount; a++)
 		{
 			auto componentArry = componentArrays.begin();
-			ossName << "ENTITY" << '\n' << entityType << '\n';
+			oss << "ENTITY" << '\n' << entityType << '\n';
 			for (int i = 0; i < componentTypeCount; i++)
 			{
-				ossName << "COMPONENT " << componentArry->first << ' ' << '*' << '\n';
-				((Component*)(componentArry->second[entityIndex]))->serialize(ossName);
-				ossName << ' ' << '*' << '\n';
+				oss << "COMPONENT " << componentArry->first << ' ' << '*' << '\n';
+				((Component*)(componentArry->second[entityIndex]))->serialize(oss);
+				oss << ' ' << '*' << '\n';
 				std::advance(componentArry, 1);
 			}
 			entityIndex++;
 		}
 	}
+}
+
+void Archetype::serialize_oss(std::ostringstream& oss, int entityType, int entity)
+{
+		int componentTypeCount = componentArrays.size();
+			auto componentArry = componentArrays.begin();
+			oss << "ENTITY" << '\n' << entityType << '\n';
+			for (int i = 0; i < componentTypeCount; i++)
+			{
+				oss << "COMPONENT " << componentArry->first << ' ' << '*' << '\n';
+				((Component*)(componentArry->second[entity]))->serialize(oss);
+				oss << ' ' << '*' << '\n';
+				std::advance(componentArry, 1);
+			}
 }
 
 bool Archetype::operator<(Archetype& archetype) {

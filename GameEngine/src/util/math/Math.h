@@ -6,10 +6,10 @@ namespace Math
 	unsigned long one_complement(unsigned long base, unsigned long value);
 
 	template <typename T> 
-	T dot(Vec3<T> &v1, Vec3<T> &v2) {
+	 T dot(const Vec3<T> &v1, const Vec3<T> &v2) {
 		return (v1.x * v2.x +
 			v1.y * v2.y +
-			v1.x * v2.x);
+			v1.z * v2.z);
 	}
 
 	template <typename T>
@@ -41,4 +41,6 @@ namespace Math
 
 		return sqrt(x * x + y * y + z * z);
 	}
+
+
 }

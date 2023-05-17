@@ -13,6 +13,7 @@ public:
 	}
 
 	void deserialize(std::string filename);
+	void deserialize_ss(std::stringstream&);
 	
 private:
 	EntityManager* ettMnger;

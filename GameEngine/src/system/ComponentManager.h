@@ -8,7 +8,8 @@
 
 enum class ComponentTypes{MOCK1 = 1, 
 						  MOCK2 = 2,
-						  };
+						  MODEL3D = 3,
+						  CAMERA = 4};
 
 class ComponentManager
 {

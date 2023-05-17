@@ -9,7 +9,10 @@ int main(void)
     engine.ettMngr->addEntityType(1, 0);
     engine.ettMngr->addEntity(0);
     engine.ettMngr->addEntity(1);
-    engine.ettMngr->serialize_ss();
+    std::ostringstream oss;
+    engine.ettMngr->serialize_oss(oss, 1, 0);
+    engine.ettMngr->destroyAllEntities();
+    std::cout << oss.str();
     //engine.run();
 
     engine.terminate();

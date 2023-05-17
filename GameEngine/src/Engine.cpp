@@ -12,9 +12,9 @@ void Engine::init()
 		assert(0 && "error : could not load glfw");
 
 	wndMngr = new WindowManager();
-	renderer = new Renderer(wndMngr);
 	input = new Input(wndMngr);
 	ettMngr = new EntityManager();
+	renderer = new Renderer(wndMngr, ettMngr);
 	taskManager = new TaskManager();
 	serializator = new Serializator(ettMngr);
 	parser = new Parser(ettMngr);

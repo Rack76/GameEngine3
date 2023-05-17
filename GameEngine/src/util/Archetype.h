@@ -55,7 +55,8 @@ public:
 	void serialize(std::ofstream& filename, int entityType);
 	void serialize(std::ofstream& file, int entityType, int entity);
 
-	void serialize_ss(int);
+	void serialize_oss(int, std::ostringstream&);
+	void serialize_oss(std::ostringstream&, int, int);
 
 	bool operator<(Archetype& archetype);
 private:

@@ -2,6 +2,7 @@
 #include <cassert>
 #include <iostream>
 #include <exception>
+#include <malloc.h>
 
 namespace Math
 {
@@ -9,26 +10,29 @@ namespace Math
 	class Vec3
 	{
 	public:
-		Vec3() : x(data[0]), y(data[1]), z(data[2]) {
 
-		}
-
-		Vec3(T _x, T _y, T _z) : x(data[0]), y(data[1]) , z(data[2]) {
+		Vec3(T _x, T _y, T _z) : x(data[0]), y(data[1]), z(data[2]) {
 			data[0] = _x;
 			data[1] = _y;
 			data[2] = _z;
 		}
 
-		bool operator== (Vec3 vec) {
-			auto len = (*this - vec).length();
-			auto average = (((*this).length() + vec.length()) / 2);
-			return (len / average) < 0.0005;
+		Vec3(T _data1[3], T _data2[3], T _data3[3], int i) : x(_data1[i]), y(_data2[i]), z(_data3[i]) {
+			data[0] = 0;
+			data[1] = 0;
+			data[2] = 0;
+		}
+
+		Vec3(T _data[9], int i) : x(_data[0 + i * 3]), y(_data[1 + i * 3]), z(_data[2 + i * 3]) {
+			data[0] = 0;
+			data[1] = 0;
+			data[2] = 0;
 		}
 
 		void operator= (const Vec3& vec) {
-			x = vec.x;
-			y = vec.y;
-			z = vec.z;
+			data[0] = vec.x;
+			data[1] = vec.y;
+			data[2] = vec.z;
 		}
 
 		Vec3 operator- (const Vec3& vec) const{
@@ -55,7 +59,7 @@ namespace Math
 				this->z / v.z);
 		}
 
-		T operator[] (const T& i) const {
+		T operator[] (int i) const {
 			return data[i];
 		}
 
@@ -78,7 +82,7 @@ namespace Math
 			z /= len;
 		}
 
-		T length() {
+		T length() const{
 			return sqrt(x * x + y * y + z * z);
 		}
 

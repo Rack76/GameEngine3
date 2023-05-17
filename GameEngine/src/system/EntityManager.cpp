@@ -2,6 +2,7 @@
 #include <cassert>
 #include <iterator>
 #include <cstdarg>
+#include "../util/event/Events.h"
 
 void EntityManager::init()
 {
@@ -20,6 +21,8 @@ void EntityManager::addEntity(int entityType)
 			{
 				entityType_archetypeTable[entityType]->addComponent(c.second, c.first);
 			}
+			int index = entityType_archetypeTable[entityType]->getSize() - 1;
+			ON_ENTITY_CREATED::call(entityType, index);
 		}
 		else
 			throw std::exception("max entity count reached !");
@@ -73,21 +76,60 @@ IComponent* EntityManager::getComponent(int entityType, int index, int component
 }
 
 void EntityManager::serialize(std::string filename) {
-	std::ofstream file(filename);
-	for (auto archetype : entityType_archetypeTable)
-	{
-		archetype.second->serialize(file, archetype.first);
+
+	try {
+		if (getEntityCount() == 0) {
+			throw std::exception("error : serialize_ss : empty world,  you must create at least one entity before serializing");
+			assert(0 && "error : serialize_ss : empty world,  you must create at least one entity before serializing");
+		}
+		else {
+			std::ofstream file(filename);
+			for (auto archetype : entityType_archetypeTable)
+			{
+				archetype.second->serialize(file, archetype.first);
+			}
+		}
+	}
+	catch(std::exception &e) {
+		std::cerr << e.what();
 	}
 }
 
-void EntityManager::serialize_ss() {
-	for (auto archetype : entityType_archetypeTable)
-	{
-		archetype.second->serialize_ss(archetype.first);
+void EntityManager::serialize_oss(std::ostringstream & oss) {
+	try {
+		if (getEntityCount() == 0){
+			throw std::exception("error : serialize_ss : empty world,  you must create at least one entity before serializing");
+			assert(0 && "error : serialize_ss : empty world,  you must create at least one entity before serializing");
+		}
+		else {
+			for (auto archetype : entityType_archetypeTable)
+			{
+				archetype.second->serialize_oss(archetype.first, oss);
+			}
+		}
 	}
+	catch (std::exception &e) {
+		std::cerr << e.what();
+	}
+}
+
+void EntityManager::serialize_oss(std::ostringstream& oss, int entityType, int entity)
+{
+	entityType_archetypeTable.at(entityType)->serialize_oss(oss, entityType, entity);
 }
 
 void EntityManager::serialize(std::string filename, int entityType, int entity) {
-	std::ofstream file(filename, std::ios_base::app);
-	entityType_archetypeTable.at(entityType)->serialize(file, entityType, entity);
+	try {
+		if (getEntityCount() == 0) {
+			throw std::exception("error : serialize : empty world,  you must create at least one entity before serializing");
+			assert(0 && "error : serialize : empty world,  you must create at least one entity before serializing");
+		}
+		else {
+			std::ofstream file(filename, std::ios_base::app);
+			entityType_archetypeTable.at(entityType)->serialize(file, entityType, entity);
+		}
+	}
+	catch (std::exception& e) {
+		std::cerr << e.what();
+	}
 }

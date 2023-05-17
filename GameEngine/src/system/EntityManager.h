@@ -11,7 +11,10 @@
 
 enum class EntityTypes{ MOCK1, 
 					    MOCK2, 
-					    MOCK3 };
+					    MOCK3,
+						PLAYER,
+						VOXEL,
+						};
 
 class EntityManager
 {
@@ -84,7 +87,8 @@ public:
 	void serialize(std::string filename);
 	void serialize(std::string filename, int entityType, int entity);
 
-	void serialize_ss();
+	void serialize_oss(std::ostringstream& oss);
+	void serialize_oss(std::ostringstream& oss, int entityType, int entity);
 
 	static constexpr int getComponentTypeCount() {
 		return ComponentManager::getMaxComponentTypeCount();
