@@ -28,8 +28,10 @@ void Renderer::init()
             auto vertices = ((Model3D*)components.at((int)ComponentTypes::MODEL3D))->vertices;
             glGenVertexArrays(1, vao);
             glBindVertexArray(*vao);
-            glCreateBuffers(1, vbo);
-            glNamedBufferStorage(vbo[VERTICES], sizeof(vertices), vertices.data(), 0);
+            glGenBuffers(1, vbo);
+            glBufferData(vbo[VERTICES], sizeof(vertices), vertices.data(), GL_STATIC_DRAW);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+            glEnableVertexAttribArray(0);
         }
         });
 }
