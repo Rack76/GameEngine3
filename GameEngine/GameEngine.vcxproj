@@ -106,7 +106,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <UndefinePreprocessorDefinitions>BOOST_ASIO_SEPARATE_COMPILATION </UndefinePreprocessorDefinitions>
@@ -140,6 +140,7 @@
     <ClCompile Include="src\system\ComponentManager.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\system\EntityManager.cpp" />
+    <ClCompile Include="src\util\math\Mat4.cpp" />
     <ClCompile Include="src\util\math\Math.cpp" />
     <ClCompile Include="src\util\math\Vec4.cpp" />
     <ClCompile Include="src\util\Parser.cpp" />
@@ -147,8 +148,11 @@
     <ClCompile Include="src\util\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\component\Camera.h" />
     <ClInclude Include="src\component\IComponent.h" />
     <ClInclude Include="src\component\Model3D.h" />
+    <ClInclude Include="src\component\Shader.h" />
+    <ClInclude Include="src\game\Engine.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\game\GameMode.h" />
     <ClInclude Include="src\system\Input.h" />
@@ -164,6 +168,7 @@
     <ClInclude Include="src\util\event\Event.h" />
     <ClInclude Include="src\util\event\EventHandler.h" />
     <ClInclude Include="src\util\math\Mat3.h" />
+    <ClInclude Include="src\util\math\Mat4.h" />
     <ClInclude Include="src\util\math\Math.h" />
     <ClInclude Include="src\component\Mock1.h" />
     <ClInclude Include="src\component\Mock2.h" />

@@ -8,7 +8,7 @@ namespace Math
 	class Mat3
 	{
 	public:
-		Mat3(Vec3<T>& x, Vec3<T>& y, Vec3<T>& z, bool _ortho = true) : ortho(_ortho), rx(_array, 0), ry(_array, 1), rz(_array, 2),
+		Mat3(Vec3<T> x, Vec3<T> y, Vec3<T> z, bool _ortho = true) : ortho(_ortho), rx(_array, 0), ry(_array, 1), rz(_array, 2),
 			cx(&_array[0], &_array[3], &_array[6], 0), cy(&_array[0], &_array[3], &_array[6], 1), cz(&_array[0], &_array[3], &_array[6], 2) {
 			_array[0] = x.x;
 			_array[1] = x.y;
@@ -42,7 +42,7 @@ namespace Math
 		Mat3 operator- (const Mat3& mat) const {
 			return Mat3(Vec3(_array[0] - mat._array[0], _array[1] - mat._array[1], _array[2] - mat._array[2]),
 				Vec3(_array[3] - mat._array[3], _array[4] - mat._array[4], _array[5] - mat._array[5]),
-				Vec3(_array[6] - mat._array[6]; _array[7] - mat._array[7]; _array[8] - mat._array[8]));
+				Vec3(_array[6] - mat._array[6], _array[7] - mat._array[7], _array[8] - mat._array[8]));
 		}
 
 		Mat3 operator* (const Mat3& mat) const {

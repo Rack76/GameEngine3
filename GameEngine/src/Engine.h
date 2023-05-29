@@ -8,6 +8,8 @@
 #include "util/Parser.h"
 #include <vector>
 
+class Game;
+
 class Engine
 {
 public:
@@ -15,7 +17,7 @@ public:
 
 	}
 
-	void init();
+	void init(Game*);
 	void run();
 	void terminate();
 

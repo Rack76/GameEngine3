@@ -59,6 +59,6 @@ public:
 	void serialize_oss(std::ostringstream&, int, int);
 
 	bool operator<(Archetype& archetype);
-private:
+
 	std::map<int, std::vector<IComponent*>> componentArrays;
 };

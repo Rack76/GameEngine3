@@ -9,7 +9,8 @@
 enum class ComponentTypes{MOCK1 = 1, 
 						  MOCK2 = 2,
 						  MODEL3D = 3,
-						  CAMERA = 4};
+						  SHADER = 4,
+						  CAMERA = 5};
 
 class ComponentManager
 {
@@ -52,5 +53,5 @@ private:
 	static const int maxComponentTypeCount = 20;
 	std::map<int, std::function<IComponent* (void)>> componentConstructors;
 	std::map<int, std::vector<std::pair<int, std::function<IComponent* (void)>>>> entityType_componentConstructorsTable;
-    int componentTypeCount = 0;
+    int componentTypeCount = 1;
 };

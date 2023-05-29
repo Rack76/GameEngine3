@@ -30,9 +30,9 @@ namespace Math
 		}
 
 		void operator= (const Vec3& vec) {
-			data[0] = vec.x;
-			data[1] = vec.y;
-			data[2] = vec.z;
+			x = vec.x;
+			y = vec.y;
+			z = vec.z;
 		}
 
 		Vec3 operator- (const Vec3& vec) const{
@@ -65,7 +65,7 @@ namespace Math
 
 		void normalize() {
 			T len = length();
-			assert(len == 0);
+			assert(len != 0);
 			try {
 				if (len == 0)
 				{

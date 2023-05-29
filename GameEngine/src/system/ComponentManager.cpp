@@ -1,6 +1,9 @@
 #include "ComponentManager.h"
 #include "../component/Mock1.h"
 #include "../component/Mock2.h"
+#include "../component/Model3D.h"
+#include "../component/Shader.h"
+#include "../component/Camera.h"
 #include <exception>
 #include <cstdarg>
 #include <iterator>
@@ -10,6 +13,9 @@ void ComponentManager::init()
 {
 	addComponentType<Mock1>();
 	addComponentType<Mock2>();
+	addComponentType<Model3D>();
+	addComponentType<Shader>();
+	addComponentType<Camera>();
 }
 
 void ComponentManager::linkComponents(int entityType) {

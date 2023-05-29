@@ -4,16 +4,20 @@
 #include <string>
 #include "glfw3.h"
 #include "util/WindowManager.h"
+#include "game/Game.h"
 
-void Engine::init()
+void Engine::init(Game* game)
 {
 	//init librairies
 	if (!glfwInit())
 		assert(0 && "error : could not load glfw");
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+
 	wndMngr = new WindowManager();
-	input = new Input(wndMngr);
 	ettMngr = new EntityManager();
+	input = new Input(wndMngr, ettMngr);
 	renderer = new Renderer(wndMngr, ettMngr);
 	taskManager = new TaskManager();
 	serializator = new Serializator(ettMngr);
@@ -26,6 +30,10 @@ void Engine::init()
 	bool* pshouldRun = &shouldRun;
 	const std::function<void()> func = [pshouldRun]() {*pshouldRun = false; };
 	TERMINATE::registerListener(func);
+
+	glfwSetCursorPos(wndMngr->getWindow(), 500, 380);
+
+	game->loadFirstGameMode();
 }
 
 void Engine::run()
@@ -43,5 +51,12 @@ void Engine::run()
 }
 
 void Engine::terminate() {
+	delete wndMngr;
+	delete ettMngr;
+	delete input;
+	delete renderer;
+	delete taskManager;
+	delete serializator;
+	delete parser;
 	glfwTerminate();
 }

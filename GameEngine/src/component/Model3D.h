@@ -2,15 +2,12 @@
 #include "Component.h"
 #include "glew.h"
 
-enum {VERTICES};
+enum {VERTICES, TEXTURE};
 
 class Model3D :public Component
 {
 public:
 	Model3D() {
-		vertices = { -1.0f , 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
-		1.0f, 0.0f, 0.0f };
 	}
 	virtual void deserialize(std::vector<std::string>) {
 
@@ -27,7 +24,8 @@ public:
 		glDeleteBuffers(1, &vbo[VERTICES]);
 	}
 
-	std::vector<GLfloat> vertices;
+	int vertexCount;
+	std::string filename;
 	GLuint vao;
-	GLuint vbo[1];
+	GLuint vbo[2];
 };

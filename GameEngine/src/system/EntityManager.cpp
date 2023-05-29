@@ -7,8 +7,8 @@
 void EntityManager::init()
 {
 	componentManager->init();
-
-	//init entityType_componentTypesTable
+	addEntityType((int)EntityTypes::VOXEL, (int)ComponentTypes::MODEL3D, (int)ComponentTypes::SHADER);
+	addEntityType((int)EntityTypes::CAMERA, (int)ComponentTypes::CAMERA);
 }
 
 void EntityManager::addEntity(int entityType)
@@ -22,7 +22,6 @@ void EntityManager::addEntity(int entityType)
 				entityType_archetypeTable[entityType]->addComponent(c.second, c.first);
 			}
 			int index = entityType_archetypeTable[entityType]->getSize() - 1;
-			ON_ENTITY_CREATED::call(entityType, index);
 		}
 		else
 			throw std::exception("max entity count reached !");

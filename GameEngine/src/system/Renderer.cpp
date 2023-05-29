@@ -2,7 +2,7 @@
 #include "glfw3.h"
 #include <cassert>
 #include "../util/WindowManager.h"
-#include "../util/event/Events.h"
+#include "../component/Shader.h"
 
 void Renderer::init()
 {
@@ -15,35 +15,113 @@ void Renderer::init()
     }
     
     glfwMakeContextCurrent(window);
+    GLenum err = glewInit();
+    if (GLEW_OK != err)
+    {
+        /* Problem: glewInit failed, something is seriously wrong. */
+        fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+    }
 
-    EntityManager* pem = ettMngr;
+    glViewport(0, 0, 1000, 760);
 
-    ON_ENTITY_CREATED::registerListener([pem](int entityType, int index){
-        switch (entityType)
+    Renderer* pr = this;
+
+    ON_ENTITY_CREATED::registerListener([pr](int entityType, int index){
+        if (entityType == (int)EntityTypes::VOXEL)
         {
-        case (int)EntityTypes::VOXEL:
-            auto components = pem->getComponents(entityType, index);
-            auto vao = &(((Model3D*)components.at((int)ComponentTypes::MODEL3D))->vao);
-            auto vbo = ((Model3D*)components.at((int)ComponentTypes::MODEL3D))->vbo;
-            auto vertices = ((Model3D*)components.at((int)ComponentTypes::MODEL3D))->vertices;
-            glGenVertexArrays(1, vao);
-            glBindVertexArray(*vao);
-            glGenBuffers(1, vbo);
-            glBufferData(vbo[VERTICES], sizeof(vertices), vertices.data(), GL_STATIC_DRAW);
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-            glEnableVertexAttribArray(0);
+            pr->loadVertices(entityType, index);
+            pr->assignProgram(entityType, index);
         }
         });
+
+    ON_PROGRAM_SOURCE_LOADED::registerListener([pr](int vertexShaderName, int fragmentShaderName,
+                                                std::string vertexShaderFileName, std::string fragmentShaderFileName) {
+        pr->storeProgram(vertexShaderName, fragmentShaderName, vertexShaderFileName, fragmentShaderFileName);
+        });
+    glClear(GL_COLOR_BUFFER_BIT);
+    glfwSwapBuffers(wndMngr->getWindow());
+
+    ON_MODEL3D_PARSED::registerListener([pr](std::string filename, std::vector<GLfloat> orderedVertices, std::vector<GLfloat> orderedTextCoord) {
+        pr->storeVerticeData(filename, orderedVertices, orderedTextCoord);
+        });
+    glClear(GL_COLOR_BUFFER_BIT);
+    glfwSwapBuffers(wndMngr->getWindow());
 }
 
 void Renderer::run()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    auto archetypes = ettMngr->getArchetypes((int)EntityTypes::VOXEL);
+ 
 
-    glfwSwapBuffers(wndMngr->getWindow());
+    for (auto& archetype : archetypes) {
+        for (int i = 0; i < archetype->getSize(); i++)
+        {
+            glClear(GL_COLOR_BUFFER_BIT);
+            auto entity = archetype->getComponents(i);
+            Model3D* mc = (Model3D*)entity.at((int)ComponentTypes::MODEL3D);
+            Shader* sc = (Shader*)entity.at((int)ComponentTypes::SHADER);
+            auto camera = (Camera*)ettMngr->getComponent((int)EntityTypes::CAMERA, 0, (int)ComponentTypes::CAMERA);
+            glUniformMatrix4fv(glGetUniformLocation(sc->program, "perspective"), 1, GL_FALSE, &camera->perspective[0]);
+            glUniformMatrix3fv(glGetUniformLocation(sc->program, "cameraOrientation"), 1, GL_FALSE, camera->orientation.getData());
+            camera->position = camera->position + camera->xVelocity;
+            camera->position = camera->position + camera->yVelocity;
+            camera->position = camera->position + camera->zVelocity;
+            glUniform3fv(glGetUniformLocation(sc->program, "cameraPosition"), 1, camera->position.data);
+            glBindVertexArray(mc->vao);
+            glUseProgram(sc->program);
+            glDrawArrays(GL_TRIANGLES, 0, mc->vertexCount);
+            glfwSwapBuffers(wndMngr->getWindow());
+        }
+    }
 }
 
-void Renderer::specifyVertices(int entityType, int index)
+void Renderer::loadVertices(int entityType, int index)
 {
-    
+    auto component = ettMngr->getComponent(entityType, index, (int)ComponentTypes::MODEL3D);
+    auto vao = &(((Model3D*)component)->vao);
+    auto vbo = ((Model3D*)component)->vbo;
+    auto filename = ((Model3D*)component)->filename;
+    auto vertices = modelsVertices.at(filename);
+    auto textCoord = modelsTextCoord.at(filename);
+    ((Model3D*)component)->vertexCount = vertices.size() / 3;
+    glGenVertexArrays(1, vao);
+    glBindVertexArray(*vao);
+    glGenBuffers(2, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[VERTICES]);
+    int size = vertices.size();
+    glBufferData(GL_ARRAY_BUFFER, size * 4 , vertices.data(), GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[TEXTURE]);
+    size = textCoord.size();
+    glBufferData(GL_ARRAY_BUFFER, size, textCoord.data(), GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glEnableVertexAttribArray(1);
+}
+
+void Renderer::storeProgram(int vertexShaderName, int fragmentShaderName,
+    std::string vertexShaderFileName, std::string fragmentShaderFileName) {
+    glCompileShader(vertexShaderName);
+    glCompileShader(fragmentShaderName);
+    GLuint program = glCreateProgram();
+    glAttachShader(program, vertexShaderName);
+    glAttachShader(program, fragmentShaderName);
+    glLinkProgram(program);
+    programs[vertexShaderFileName][fragmentShaderFileName] = program;
+}
+
+void Renderer::storeVerticeData(std::string filename, std::vector<GLfloat> orderedVertices, std::vector<GLfloat> orderedTextCoord) {
+    modelsVertices.insert({ filename, orderedVertices });
+    modelsTextCoord.insert({ filename, orderedTextCoord });
+}
+
+void Renderer::assignProgram(int entityType, int index) {
+    try {
+        auto component = ettMngr->getComponent(entityType, index, (int)ComponentTypes::SHADER);
+        ((Shader*)component)->program = programs.at(((Shader*)component)->vertexShadername).at(((Shader*)component)->fragmentShadername);
+    }
+    catch (std::exception& e) {
+        std::cerr << e.what();
+    }
 }

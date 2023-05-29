@@ -13,12 +13,12 @@ public:
 	void init(Engine* engine); // define your game modes, insert them in map, and define your current game mode
 
 	void loadFirstGameMode() {
-		(*firstGameMode.get())->load();
+		(firstGameMode.get())->load();
 	}
 
 	void loadGameMode(int gameMode) {
 		try {
-			(*gameModes.at(gameMode).get())->load();
+			(gameModes.at(gameMode).get())->load();
 		}
 		catch (std::exception& e) {
 			std::cerr << e.what();
@@ -27,7 +27,7 @@ public:
 
 private:
 
-	std::map<int, std::unique_ptr<GameMode*>> gameModes;
-	std::unique_ptr<GameMode*> firstGameMode;
+	std::map<int, std::shared_ptr<GameMode>> gameModes;
+	std::shared_ptr<GameMode> firstGameMode;
 	Engine* engine;
 };

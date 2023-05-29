@@ -18,16 +18,24 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="game\Game.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="game\MainMenu.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game\Game.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="game\GameMode.h">
+    <ClInclude Include="game\Menu.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="entities.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="basic.vert" />
+    <None Include="basic.frag" />
+    <None Include="untitled.dae" />
   </ItemGroup>
 </Project>
