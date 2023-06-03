@@ -29,7 +29,7 @@ void Engine::init(Game* game)
 	serializator->init();
 	bool* pshouldRun = &shouldRun;
 	const std::function<void()> func = [pshouldRun]() {*pshouldRun = false; };
-	TERMINATE::registerListener(func);
+	TERMINATE::registerListener("terminate", func);
 
 	glfwSetCursorPos(wndMngr->getWindow(), 500, 380);
 

@@ -13,7 +13,7 @@ enum class EntityTypes{ MOCK1,
 					    MOCK2, 
 					    MOCK3,
 						PLAYER,
-						VOXEL,
+						RENDERER,
 						CAMERA};
 
 class EntityManager

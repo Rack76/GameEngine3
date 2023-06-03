@@ -2,19 +2,20 @@
 
 #include <functional>
 #include <vector>
+#include <map>
 
 template<class ...T>
 class EventHandler {
 public:
 	void call(T... event)
 	{
-		for (int i = 0; i < listeners.size(); i++)
-			listeners[i](event...);
+		for (auto& listener : listeners)
+			listener.second(event...);
 	}
-	void registerListener(const std::function<void(T...)>& listener)
+	void registerListener(std::string &str, const std::function<void(T...)>& listener)
 	{
-		listeners.push_back(listener);
+		listeners.insert({str, listener});
 	}
 private:
-	std::vector<std::function<void(T...)>> listeners;
+	std::map<std::string, std::function<void(T...)>> listeners;
 };

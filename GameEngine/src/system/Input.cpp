@@ -8,7 +8,7 @@ void cursorCallback(GLFWwindow* window, double xpos, double ypos);
 
 void Input::init()
 {
-	ON_ESC_PRESS::registerListener([]() {TERMINATE::call(); });
+	ON_ESC_PRESS::registerListener("processEscape", []() {TERMINATE::call(); });
 	glfwSetKeyCallback(wndMngr->getWindow(), keyCallback);
 	glfwSetCursorPosCallback(wndMngr->getWindow(), cursorCallback);
 	glfwSetWindowUserPointer(wndMngr->getWindow(), this);

@@ -10,9 +10,9 @@ public:
 	{
 		handler().call(event...);
 	}
-	static void registerListener(const std::function<void(T...)>& listener)
+	static void registerListener(std::string str, const std::function<void(T...)>&listener)
 	{
-		handler().registerListener(listener);
+		handler().registerListener(str, listener);
 	}
 private:
 	static EventHandler<T...>& handler()

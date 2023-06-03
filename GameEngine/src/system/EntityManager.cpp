@@ -7,7 +7,7 @@
 void EntityManager::init()
 {
 	componentManager->init();
-	addEntityType((int)EntityTypes::VOXEL, (int)ComponentTypes::MODEL3D, (int)ComponentTypes::SHADER);
+	addEntityType((int)EntityTypes::RENDERER, (int)ComponentTypes::MODEL3D, (int)ComponentTypes::SHADER);
 	addEntityType((int)EntityTypes::CAMERA, (int)ComponentTypes::CAMERA);
 }
 
