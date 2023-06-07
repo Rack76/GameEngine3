@@ -52,7 +52,7 @@ public:
 	Math::Mat3<GLfloat> orientation = Math::Mat3<GLfloat>(Math::Vec3<GLfloat>(1.0f, 0.0f, 0.0f),
 		Math::Vec3<GLfloat>(0.0f, 1.0f, 0.0f),
 		Math::Vec3<GLfloat>(0.0f, 0.0f, 1.0f));
-	Math::Vec3<GLfloat> position = Math::Vec3(0.0f, 0.0f, 4.0f);
+	Math::Vec3<GLfloat> position = Math::Vec3(0.0f, 0.0f, 20.0f);
 	Math::Vec3<GLfloat> xVelocity = Math::Vec3(0.0f, 0.0f, 0.0f);
 	Math::Vec3<GLfloat> yVelocity = Math::Vec3(0.0f, 0.0f, 0.0f);
 	Math::Vec3<GLfloat> zVelocity = Math::Vec3(0.0f, 0.0f, 0.0f);

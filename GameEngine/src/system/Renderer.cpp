@@ -6,6 +6,7 @@
 
 void Renderer::init()
 {
+    glfwWindowHint(GLFW_SAMPLES, 4);
     wndMngr->CreateWindow();
     auto window = wndMngr->getWindow();
     if (!window)
@@ -15,6 +16,17 @@ void Renderer::init()
     }
     
     glfwMakeContextCurrent(window);
+
+    GLint result;
+    glGetIntegerv(GL_SAMPLE_BUFFERS, &result);
+    if (result == 1)
+        glEnable(GL_MULTISAMPLE);
+
+    glGetIntegerv(GL_SAMPLES, &result);
+
+    glHint(GL_POLYGON_SMOOTH_HINT, GL_FASTEST);
+    glEnable(GL_POLYGON_SMOOTH);
+
     GLenum err = glewInit();
     if (GLEW_OK != err)
     {
@@ -23,6 +35,7 @@ void Renderer::init()
     }
 
     glViewport(0, 0, 1000, 760);
+    glEnable(GL_DEPTH_TEST);
 
     Renderer* pr = this;
 
@@ -52,10 +65,10 @@ void Renderer::run()
 {
     auto archetypes = ettMngr->getArchetypes((int)EntityTypes::RENDERER);
  
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     for (auto& archetype : archetypes) {
         for (int i = 0; i < archetype->getSize(); i++)
         {
-            glClear(GL_COLOR_BUFFER_BIT);
             auto entity = archetype->getComponents(i);
             Model3D* mc = (Model3D*)entity.at((int)ComponentTypes::MODEL3D);
             Shader* sc = (Shader*)entity.at((int)ComponentTypes::SHADER);
@@ -69,9 +82,9 @@ void Renderer::run()
             glBindVertexArray(mc->vao);
             glUseProgram(sc->program);
             glDrawArrays(GL_TRIANGLES, 0, mc->vertexCount);
-            glfwSwapBuffers(wndMngr->getWindow());
         }
     }
+    glfwSwapBuffers(wndMngr->getWindow());
 }
 
 void Renderer::loadVertices(int entityType, int index)
@@ -97,6 +110,8 @@ void Renderer::loadVertices(int entityType, int index)
     glBufferData(GL_ARRAY_BUFFER, size, textCoord.data(), GL_STATIC_DRAW);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
     glEnableVertexAttribArray(1);
+
+    //glCreateTextures(GL_TEXTURE_2D, 1, )
 }
 
 void Renderer::storeProgram(int vertexShaderName, int fragmentShaderName,
