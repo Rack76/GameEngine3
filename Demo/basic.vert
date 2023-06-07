@@ -14,5 +14,5 @@ void main()
 	view = transpose(view);
 	view[3] = cameraPosition4;
 	view = transpose(view);
-	gl_Position = vec4(position, 1.0) * view * perspective;
+	gl_Position = vec4(position, 1.0) ;
 }
